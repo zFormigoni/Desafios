@@ -1,15 +1,21 @@
-# fernandev
+## React Interview
 
-## React Interview Challenge #02
+## Instruções:
 
-E aí dev, tudo bem? Trouxe pra você mais um desafio de entrevista para que você possa treinar em casa e aprimorar suas habilidades.
+-   Você tem um formulário de login INCOMPLETO
+-   Não é permitido adicionar novos elementos HTML
+-   Não é permitido usar refs
 
-Dessa vez temos um formulário de login incompleto e a sua missão é finalizar ele para a sua equipe.
+## Objetivos
 
-Preste bem atenção às instruções dentro do arquivo App.jsx e bora codar!
-
-**Se você curtir esse conteúdo, deixa uma STAR aí nesse repo,** porque isso me motiva a trazer mais conteúdos desse gênero.
+-   Desabilite o botão de Login caso o e-mail esteja em branco OU a senha for menor que 6 dígitos.
+-   O botão de login deve disparar a função login(), importada no topo deste arquivo, e passar os dados necessários.
+-   Mostre uma mensagem de erro de login() caso o Login falhe. A mensagem deve ser limpa a cada nova tentativa de Login.
+-   Desabilite o botão de Login equanto você está executando o login.
+-   Mostre um alerta caso o login seja efetuado com sucesso (javascript alert). Investigue a função login() para entender como ter sucesso na requisição.
 
 ## Resolução do desafio
 
 https://youtu.be/NAtf3T9gG7s
+
+# fernandev

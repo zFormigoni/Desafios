@@ -1,16 +1,3 @@
-/*
-? DESAFIO - Shopping Cart:
-
-Você deve desenvolver um carrinho de compras funcional.
-Funcionalidades que esperamos que você desenvolva:
-
-x - inserção de novos produtos no carrinho
-x - remoção de produtos já inseridos
-x - alteração de quantidade de cada item 
-x - cálculo do preço total dos itens inseridos
-
-x - FUNCIONALIDADE EXTRA: aplicação de cupom de desconto
-*/
 import './styles.scss';
 
 import PageHeader from './layout/PageHeader';
