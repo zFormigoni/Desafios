@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import InputForm from './components/InputForm';
-import SelectForm from './components/SelectForm';
-import GenreForm from './components/GenreForm';
+import Form from './components/Form';
 
 function App() {
     const [data, setData] = useState({
+        name: '',
+        surname: '',
         fullName: '',
         email: '',
         matrialStatus: '',
@@ -23,27 +23,29 @@ function App() {
         let value = 0;
         let amontToAdd = 100 / Object.keys(data).length;
 
+        data.name ? (value += amontToAdd) : null;
+        data.surname ? (value += amontToAdd) : null;
+        data.matrialStatus ? (value += amontToAdd) : null;
+        data.genre ? (value += amontToAdd) : null;
+
         if (data.fullName) {
             const expldeString = data.fullName.split(' ');
-            expldeString[1] ? (value += amontToAdd) : null;
+            expldeString[0] ? (value += amontToAdd) : null;
         }
         if (data.email) {
             const pattern =
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             pattern.test(data.email) ? (value += amontToAdd) : null;
         }
-        if (data.matrialStatus) {
-            value += amontToAdd;
-        }
-        if (data.genre) {
-            value += amontToAdd;
-        }
-        return value;
+
+        return Math.trunc(value);
     };
 
     const handleClick = () => {
         alert('enviado');
         setData({
+            name: '',
+            surname: '',
             fullName: '',
             email: '',
             matrialStatus: '',
@@ -64,32 +66,7 @@ function App() {
                     ></div>
                 </div>
 
-                <InputForm
-                    titulo="Nome Completo"
-                    inputName="fullName"
-                    data={data.fullName}
-                    onchange={handleChange}
-                />
-
-                <InputForm
-                    titulo="E-mail"
-                    inputName="email"
-                    data={data.email}
-                    onchange={handleChange}
-                />
-
-                <SelectForm
-                    titulo={'Estado Civil'}
-                    inputName={'matrialStatus'}
-                    data={data.matrialStatus}
-                    onchange={handleChange}
-                />
-
-                <GenreForm
-                    titulo={'Gênero'}
-                    data={data.genre}
-                    onchange={handleChange}
-                />
+                <Form data={data} onchange={handleChange} />
 
                 <button
                     onClick={handleClick}

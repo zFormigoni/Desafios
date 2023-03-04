@@ -7,7 +7,7 @@ const GenreForm = ({ titulo, data, onchange }) => {
             <div className="radios-container">
                 {genres.map((genre) => {
                     return (
-                        <span>
+                        <span key={genre}>
                             <input
                                 type="radio"
                                 name="genre"

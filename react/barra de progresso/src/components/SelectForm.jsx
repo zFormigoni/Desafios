@@ -11,7 +11,11 @@ const SelectForm = ({ titulo, inputName, data, onchange }) => {
             <label htmlFor="">{titulo}</label>
             <select name={inputName} value={data} onChange={onchange}>
                 {options.map((item) => {
-                    return <option value={item.value}>{item.text}</option>;
+                    return (
+                        <option key={item.value} value={item.value}>
+                            {item.text}
+                        </option>
+                    );
                 })}
             </select>
         </div>
