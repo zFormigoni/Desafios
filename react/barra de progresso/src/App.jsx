@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import InputForm from './components/InputForm';
+import SelectForm from './components/SelectForm';
+import GenreForm from './components/GenreForm';
 
 function App() {
     const [data, setData] = useState({
@@ -7,17 +10,18 @@ function App() {
         matrialStatus: '',
         genre: '',
     });
+
     const handleChange = (event) => {
         const { name, value } = event.target;
-
         setData((prev) => {
             const newData = { ...prev, [name]: value };
             return newData;
         });
     };
+
     const calculateProgressBar = () => {
         let value = 0;
-        let amontToAdd = 25;
+        let amontToAdd = 100 / Object.keys(data).length;
 
         if (data.fullName) {
             const expldeString = data.fullName.split(' ');
@@ -36,6 +40,7 @@ function App() {
         }
         return value;
     };
+
     const handleClick = () => {
         alert('enviado');
         setData({
@@ -58,61 +63,34 @@ function App() {
                         style={{ width: `${calculateProgressBar()}%` }}
                     ></div>
                 </div>
-                {/* crie a barra de progresso aqui */}
-                <div className="form-group">
-                    <label htmlFor="">Nome Completo</label>
-                    <input
-                        name="fullName"
-                        value={data.fullName}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="">E-mail</label>
-                    <input
-                        name="email"
-                        value={data.email}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="">Estado Civil</label>
-                    <select
-                        name="matrialStatus"
-                        value={data.matrialStatus}
-                        onChange={handleChange}
-                    >
-                        <option value="">- selecione...</option>
-                        <option value="solteiro">Solteiro</option>
-                        <option value="casado">Casado</option>
-                        <option value="divorciado">Divorciado</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="">Gênero</label>
-                    <div className="radios-container">
-                        <span>
-                            <input
-                                type="radio"
-                                name="genre"
-                                value={'masculino'}
-                                onChange={handleChange}
-                                checked={data.genre === 'masculino'}
-                            />{' '}
-                            Masculino
-                        </span>
-                        <span>
-                            <input
-                                type="radio"
-                                name="genre"
-                                value={'feminino'}
-                                onChange={handleChange}
-                                checked={data.genre === 'feminino'}
-                            />{' '}
-                            Feminino
-                        </span>
-                    </div>
-                </div>
+
+                <InputForm
+                    titulo="Nome Completo"
+                    inputName="fullName"
+                    data={data.fullName}
+                    onchange={handleChange}
+                />
+
+                <InputForm
+                    titulo="E-mail"
+                    inputName="email"
+                    data={data.email}
+                    onchange={handleChange}
+                />
+
+                <SelectForm
+                    titulo={'Estado Civil'}
+                    inputName={'matrialStatus'}
+                    data={data.matrialStatus}
+                    onchange={handleChange}
+                />
+
+                <GenreForm
+                    titulo={'Gênero'}
+                    data={data.genre}
+                    onchange={handleChange}
+                />
+
                 <button
                     onClick={handleClick}
                     disabled={calculateProgressBar() !== 100}
