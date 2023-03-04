@@ -23,17 +23,38 @@ const Summary = ({ total }) => {
 
     const addCupom = (cupom) => {
         cupom == '10%'
-            ? setTotalDesconto((total - (total / 100) * 10).toFixed(2))
+            ? setTotalDesconto(total - (total / 100) * 10)
             : cupom == '20%'
-            ? setTotalDesconto((total - (total / 100) * 20).toFixed(2))
+            ? setTotalDesconto(total - (total / 100) * 20)
             : cupom == '50%'
-            ? setTotalDesconto((total - (total / 100) * 50).toFixed(2))
+            ? setTotalDesconto(total - (total / 100) * 50)
             : setTotalDesconto(total);
     };
 
     useEffect(() => {
         addCupom(cupom);
     });
+
+    const options = [
+        { value: '', text: '... selecione...' },
+        { value: 'sp', text: 'São Paulo' },
+        { value: 'rj', text: 'Rio de Janeiro' },
+        { value: 'mg', text: 'Minas gerais' },
+    ];
+
+    const [frete, setFrete] = useState(0);
+
+    const calcFrete = (e) => {
+        if (e == 'mg') {
+            setFrete(30);
+        }
+        if (e == 'rj') {
+            setFrete(20);
+        }
+        if (e == 'sp') {
+            setFrete(10);
+        }
+    };
 
     return (
         <>
@@ -44,10 +65,26 @@ const Summary = ({ total }) => {
                         <span>Sub-total</span>
                         <span>R$ {total.toFixed(2)}</span>
                     </div>
-                    <div>
-                        <span>Frete</span>
+                    <div className="form-group">
+                        <label htmlFor="">{'Frete'}</label>
+                        <select
+                            name={'frete'}
+                            onChange={(e) => {
+                                calcFrete(e.target.value);
+                            }}
+                        >
+                            {options.map((option) => {
+                                return (
+                                    <option
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.text}
+                                    </option>
+                                );
+                            })}
+                        </select>
                     </div>
-                    <input type="text" />
                     <div>
                         <button onClick={() => addCupom(cupom)}>
                             Adicionar cupom de desconto
@@ -64,7 +101,9 @@ const Summary = ({ total }) => {
                     <span>Total</span>
                     <span>
                         R$
-                        {totalDesconto == 0 ? total.toFixed(2) : totalDesconto}
+                        {totalDesconto == 0
+                            ? (total + frete).toFixed(2)
+                            : (totalDesconto + frete).toFixed(2)}
                     </span>
                 </footer>
             </div>

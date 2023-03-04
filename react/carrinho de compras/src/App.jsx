@@ -48,7 +48,6 @@ function App() {
 
     const handleAddItem = () => {
         api.post('/cart', createProduct()).then((response) => {
-            console.log(response);
             fetchData(1000);
         });
     };
@@ -71,7 +70,6 @@ function App() {
 
     const handleRemoveItem = (item) => {
         api.delete(`/cart/${item}`).then((response) => {
-            console.log(response);
             fetchData(1000);
         });
     };
@@ -105,7 +103,25 @@ function App() {
                         >
                             Adicionar ao carrinho
                         </button>
-
+                        <p>
+                            <b>Cupons:</b> vitor1, vitor2, vitor5
+                        </p>
+                        {showLoading && (
+                            <div
+                                style={{
+                                    width: '100%',
+                                    marginTop: '100px',
+                                    marginLeft: '-50px',
+                                    position: 'absolute',
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <CircularProgress />
+                            </div>
+                        )}
                         <table>
                             <thead>
                                 <tr>
@@ -118,20 +134,6 @@ function App() {
                             </thead>
 
                             <tbody>
-                                {showLoading && (
-                                    <div
-                                        style={{
-                                            width: '100%',
-                                            position: 'absolute',
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }}
-                                    >
-                                        <CircularProgress />
-                                    </div>
-                                )}
                                 {showCart &&
                                     cart.map((item) => (
                                         <TableRow

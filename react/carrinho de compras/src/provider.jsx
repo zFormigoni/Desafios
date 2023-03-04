@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const key = 'a7b57968a73943939944756ede06d6f5';
+const key = 'b7f9b04fc8824669be9e1951da62d9a0';
 
 export const api = axios.create({
     baseURL: `https://crudcrud.com/api/${key}`,
