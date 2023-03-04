@@ -2,14 +2,34 @@ import { useState } from 'react';
 import Form from './components/Form';
 
 function App() {
-    const [data, setData] = useState({
-        name: '',
-        surname: '',
-        fullName: '',
-        email: '',
-        matrialStatus: '',
-        genre: '',
-    });
+    const datas = [
+        {
+            fullName: '',
+            email: '',
+            matrialStatus: '',
+            genre: '',
+        },
+        {
+            name: '',
+            surname: '',
+            fullName: '',
+            email: '',
+            matrialStatus: '',
+            genre: '',
+        },
+    ];
+    var form;
+    var selectData;
+    try {
+        form = localStorage.getItem('form');
+        form == 1 ? (selectData = datas[1]) : (selectData = datas[0]);
+    } catch {
+        form = localStorage.setItem('form', 1);
+    } finally {
+        console.log(selectData);
+    }
+
+    const [data, setData] = useState(selectData);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -21,12 +41,12 @@ function App() {
 
     const calculateProgressBar = () => {
         let value = 0;
-        let amontToAdd = 100 / Object.keys(data).length;
+        let amontToAdd = 100 / Object.keys(selectData).length;
 
-        data.name ? (value += amontToAdd) : null;
-        data.surname ? (value += amontToAdd) : null;
-        data.matrialStatus ? (value += amontToAdd) : null;
-        data.genre ? (value += amontToAdd) : null;
+        if (selectData === datas[1]) {
+            data.name ? (value += amontToAdd) : null;
+            data.surname ? (value += amontToAdd) : null;
+        }
 
         if (data.fullName) {
             const expldeString = data.fullName.split(' ');
@@ -38,19 +58,23 @@ function App() {
             pattern.test(data.email) ? (value += amontToAdd) : null;
         }
 
+        data.matrialStatus ? (value += amontToAdd) : null;
+        data.genre ? (value += amontToAdd) : null;
+
         return Math.trunc(value);
     };
 
     const handleClick = () => {
         alert('enviado');
-        setData({
-            name: '',
-            surname: '',
-            fullName: '',
-            email: '',
-            matrialStatus: '',
-            genre: '',
-        });
+        setData(selectData);
+    };
+
+    const changeForm = () => {
+        localStorage.getItem('form') == 1
+            ? localStorage.setItem('form', 2)
+            : localStorage.setItem('form', 1);
+
+        window.location.reload(true);
     };
 
     return (
@@ -66,13 +90,21 @@ function App() {
                     ></div>
                 </div>
 
-                <Form data={data} onchange={handleChange} />
+                <Form
+                    data={data}
+                    onchange={handleChange}
+                    form={selectData == datas[0] ? 0 : 1}
+                />
 
                 <button
+                    className="btn-submit"
                     onClick={handleClick}
                     disabled={calculateProgressBar() !== 100}
                 >
                     Enviar Formulário
+                </button>
+                <button className="btn-change" onClick={changeForm}>
+                    Trocar formulario
                 </button>
             </main>
         </div>

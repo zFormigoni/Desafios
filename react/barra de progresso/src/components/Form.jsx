@@ -2,45 +2,74 @@ import InputForm from './InputForm';
 import SelectForm from './SelectForm';
 import GenreForm from './GenreForm';
 
-const Form = ({ data, onchange }) => {
-    const inputs = [
-        {
-            type: 'InputForm',
-            titulo: 'Nome',
-            inputName: 'name',
-            data: data.name,
-        },
-        {
-            type: 'InputForm',
-            titulo: 'Sobrenome',
-            inputName: 'surname',
-            data: data.surname,
-        },
-        {
-            type: 'InputForm',
-            titulo: 'Nome Completo',
-            inputName: 'fullName',
-            data: data.fullName,
-        },
-        {
-            type: 'InputForm',
-            titulo: 'E-mail',
-            inputName: 'email',
-            data: data.email,
-        },
-        {
-            type: 'SelectForm',
-            titulo: 'Estado Civil',
-            inputName: 'matrialStatus',
-            data: data.matrialStatus,
-        },
-        {
-            type: 'GenreForm',
-            titulo: 'Gênero',
-            data: data.genre,
-        },
+const Form = ({ data, onchange, form }) => {
+    const Testeinputs = [
+        [
+            {
+                type: 'InputForm',
+                titulo: 'Nome',
+                inputName: 'name',
+                data: data.name,
+            },
+            {
+                type: 'InputForm',
+                titulo: 'Sobrenome',
+                inputName: 'surname',
+                data: data.surname,
+            },
+            {
+                type: 'InputForm',
+                titulo: 'Nome Completo',
+                inputName: 'fullName',
+                data: data.fullName,
+            },
+            {
+                type: 'InputForm',
+                titulo: 'E-mail',
+                inputName: 'email',
+                data: data.email,
+            },
+            {
+                type: 'SelectForm',
+                titulo: 'Estado Civil',
+                inputName: 'matrialStatus',
+                data: data.matrialStatus,
+            },
+            {
+                type: 'GenreForm',
+                titulo: 'Gênero',
+                data: data.genre,
+            },
+        ],
+        [
+            {
+                type: 'InputForm',
+                titulo: 'Nome Completo',
+                inputName: 'fullName',
+                data: data.fullName,
+            },
+            {
+                type: 'InputForm',
+                titulo: 'E-mail',
+                inputName: 'email',
+                data: data.email,
+            },
+            {
+                type: 'SelectForm',
+                titulo: 'Estado Civil',
+                inputName: 'matrialStatus',
+                data: data.matrialStatus,
+            },
+            {
+                type: 'GenreForm',
+                titulo: 'Gênero',
+                data: data.genre,
+            },
+        ],
     ];
 
+    var inputs = [];
+    form == 0 ? (inputs = Testeinputs[1]) : (inputs = Testeinputs[0]);
     return (
         <>
             {inputs.map((input) => {
