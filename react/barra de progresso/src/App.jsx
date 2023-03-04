@@ -25,8 +25,6 @@ function App() {
         form == 1 ? (selectData = datas[1]) : (selectData = datas[0]);
     } catch {
         form = localStorage.setItem('form', 1);
-    } finally {
-        console.log(selectData);
     }
 
     const [data, setData] = useState(selectData);
